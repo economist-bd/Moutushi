@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>বাংলা রোমান্টিক ইলাস্ট্রেশন প্রম্পট লাইব্রেরি</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@500;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#F3E8D8;
+    --paper:#FBF4E8;
+    --ochre:#C9915A;
+    --terracotta:#B5563C;
+    --brown:#4A3428;
+    --brown-deep:#2E211A;
+    --moss:#6B7A54;
+    --gold:#D4A857;
+    --ink:#3A2A20;
+    --line: rgba(74,52,40,0.14);
+    --shadow: 0 8px 24px rgba(46,33,26,0.12);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(1200px 600px at 10% -10%, rgba(212,168,87,0.18), transparent 60%),
+      radial-gradient(1000px 500px at 100% 0%, rgba(181,86,60,0.12), transparent 55%),
+      var(--cream);
+    font-family:'Hind Siliguri','JetBrains Mono',sans-serif;
+    color:var(--ink);
+    min-height:100vh;
+    padding-bottom:80px;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:28px 18px 60px;}
+  header.hero{
+    background: linear-gradient(135deg, var(--brown-deep), var(--brown) 55%, var(--terracotta));
+    color:#fbf4e8;
+    border-radius:22px;
+    padding:34px 28px;
+    box-shadow: var(--shadow);
+    position:relative;
+    overflow:hidden;
+  }
+  header.hero::after{
+    content:"";
+    position:absolute; inset:0;
+    background: repeating-linear-gradient(115deg, rgba(255,255,255,0.035) 0 2px, transparent 2px 26px);
+    pointer-events:none;
+  }
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:#e8c98f;
+    margin-bottom:10px;
+  }
+  h1{
+    font-family:'Baloo Da 2',sans-serif;
+    font-size:clamp(26px,4vw,38px);
+    margin:0 0 10px;
+    line-height:1.25;
+  }
+  .hero p{
+    margin:0;
+    max-width:640px;
+    line-height:1.7;
+    color:#f1e3c9;
+    font-size:15px;
+  }
+  .hero-stats{
+    display:flex; gap:22px; margin-top:20px; flex-wrap:wrap;
+  }
+  .stat{
+    background:rgba(251,244,232,0.08);
+    border:1px solid rgba(251,244,232,0.25);
+    border-radius:12px;
+    padding:10px 16px;
+    font-family:'JetBrains Mono',monospace;
+  }
+  .stat b{display:block;font-size:20px;color:#fff;}
+  .stat span{font-size:11px;color:#e8d3ab;}
+
+  .base-style-card{
+    margin-top:22px;
+    background:var(--paper);
+    border:1.5px dashed var(--ochre);
+    border-radius:18px;
+    padding:20px 22px;
+    box-shadow: var(--shadow);
+  }
+  .base-style-card h2{
+    font-family:'Baloo Da 2',sans-serif;
+    margin:0 0 8px;
+    font-size:18px;
+    color:var(--terracotta);
+    display:flex; align-items:center; gap:8px;
+  }
+  .base-style-card p.note{
+    margin:0 0 12px;
+    font-size:13.5px;
+    color:#6b5a4a;
+  }
+  textarea#baseStyleText{
+    width:100%;
+    min-height:90px;
+    resize:vertical;
+    font-family:'JetBrains Mono',monospace;
+    font-size:12.5px;
+    line-height:1.6;
+    padding:12px;
+    border-radius:10px;
+    border:1px solid var(--line);
+    background:#fff;
+    color:var(--brown-deep);
+  }
+
+  .toolbar{
+    margin-top:22px;
+    display:flex; gap:10px; flex-wrap:wrap; align-items:center;
+  }
+  #searchInput{
+    flex:1; min-width:200px;
+    padding:12px 14px;
+    border-radius:12px;
+    border:1px solid var(--line);
+    background:#fff;
+    font-family:'Hind Siliguri',sans-serif;
+    font-size:14.5px;
+    color:var(--ink);
+  }
+  .chips{
+    display:flex; gap:8px; flex-wrap:wrap; margin-top:14px;
+  }
+  .chip{
+    padding:7px 14px;
+    border-radius:999px;
+    border:1px solid var(--line);
+    background:#fff;
+    font-size:13px;
+    cursor:pointer;
+    color:var(--brown);
+    transition:.15s;
+    white-space:nowrap;
+  }
+  .chip.active{
+    background:var(--terracotta);
+    border-color:var(--terracotta);
+    color:#fff;
+  }
+
+  .grid{
+    margin-top:24px;
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+    gap:16px;
+  }
+  .card{
+    background:#fff;
+    border-radius:16px;
+    border:1px solid var(--line);
+    padding:16px 16px 14px;
+    box-shadow: 0 2px 10px rgba(46,33,26,0.06);
+    display:flex; flex-direction:column; gap:10px;
+    position:relative;
+  }
+  .card .num{
+    position:absolute; top:14px; right:16px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px; color:#b9a68d;
+  }
+  .card .cat{
+    display:inline-block;
+    font-size:11px;
+    font-weight:600;
+    color:var(--moss);
+    background:rgba(107,122,84,0.1);
+    padding:3px 10px;
+    border-radius:999px;
+    width:fit-content;
+  }
+  .card h3{
+    font-family:'Baloo Da 2',sans-serif;
+    font-size:16px;
+    margin:0;
+    color:var(--brown-deep);
+    padding-right:30px;
+  }
+  .card .prompt-text{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    line-height:1.55;
+    color:#5b4a3a;
+    background:var(--paper);
+    border-radius:10px;
+    padding:10px;
+    max-height:150px;
+    overflow:auto;
+  }
+  .card button.copy-btn{
+    align-self:flex-start;
+    background:var(--terracotta);
+    color:#fff;
+    border:none;
+    padding:8px 16px;
+    border-radius:9px;
+    font-size:13px;
+    cursor:pointer;
+    font-family:'Hind Siliguri',sans-serif;
+    font-weight:600;
+    transition:.15s;
+  }
+  .card button.copy-btn:hover{background:var(--brown);}
+  .card button.copy-btn.copied{background:var(--moss);}
+  .card.custom{border-color:var(--gold); background:linear-gradient(180deg,#fffdf7,#fff);}
+  .card .del-btn{
+    position:absolute; top:12px; right:16px;
+    background:none; border:none; color:#c0392b; font-size:16px; cursor:pointer; display:none;
+  }
+  .card.custom .del-btn{display:block; top:auto; bottom:14px; right:16px;}
+  .card.custom .num{display:none;}
+
+  .add-section{
+    margin-top:36px;
+    background:var(--paper);
+    border-radius:18px;
+    padding:22px;
+    border:1px solid var(--line);
+    box-shadow: var(--shadow);
+  }
+  .add-section h2{
+    font-family:'Baloo Da 2',sans-serif;
+    color:var(--terracotta);
+    margin:0 0 14px;
+    font-size:19px;
+  }
+  .add-form{
+    display:grid;
+    gap:10px;
+    grid-template-columns: 1fr 1fr;
+  }
+  .add-form .full{grid-column:1/-1;}
+  .add-form label{
+    font-size:12.5px; color:#6b5a4a; margin-bottom:4px; display:block; font-weight:600;
+  }
+  .add-form input, .add-form select, .add-form textarea{
+    width:100%;
+    padding:10px 12px;
+    border-radius:9px;
+    border:1px solid var(--line);
+    font-family:'Hind Siliguri',sans-serif;
+    font-size:14px;
+    background:#fff;
+    color:var(--ink);
+  }
+  .add-form textarea{min-height:80px; font-family:'JetBrains Mono',monospace; font-size:12.5px;}
+  .add-form button{
+    grid-column:1/-1;
+    background:var(--brown-deep);
+    color:#fff;
+    border:none;
+    padding:12px;
+    border-radius:10px;
+    font-size:15px;
+    font-weight:600;
+    cursor:pointer;
+    font-family:'Hind Siliguri',sans-serif;
+  }
+  .add-form button:hover{background:var(--terracotta);}
+  #saveMsg{font-size:13px; color:var(--moss); margin-top:8px; display:none;}
+
+  .empty-note{
+    grid-column:1/-1;
+    text-align:center;
+    color:#a0907c;
+    padding:30px;
+    font-size:14px;
+  }
+
+  /* Install banner */
+  #installBanner{
+    position:fixed; left:16px; right:16px; bottom:16px;
+    max-width:520px; margin:0 auto;
+    background:var(--brown-deep);
+    color:#fbf4e8;
+    border-radius:16px;
+    padding:14px 16px;
+    display:none;
+    align-items:center;
+    gap:12px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.35);
+    z-index:999;
+  }
+  #installBanner.show{display:flex;}
+  #installBanner .txt{flex:1; font-size:13.5px; line-height:1.5;}
+  #installBanner .txt b{display:block; font-size:14.5px; margin-bottom:2px; color:var(--gold);}
+  #installBanner button{
+    border:none; border-radius:9px; padding:9px 14px; font-size:13px; font-weight:600; cursor:pointer; font-family:'Hind Siliguri',sans-serif;
+  }
+  #installBanner .install-btn{background:var(--terracotta); color:#fff;}
+  #installBanner .dismiss-btn{background:transparent; color:#cbb595; padding:9px 8px;}
+
+  footer{
+    margin-top:40px;
+    text-align:center;
+    color:#a0907c;
+    font-size:12.5px;
+    line-height:1.8;
+  }
+  @media (max-width:520px){
+    .add-form{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="eyebrow">IMAGE GENERATION PROMPT LIBRARY · বাংলা ইলাস্ট্রেশন স্টাইল</div>
+    <h1>Viral রিলস কভারের মতো ২ডি ইলাস্ট্রেশন তৈরির জন্য রেডি প্রম্পট</h1>
+    <p>প্রতিটি প্রম্পট এমনভাবে লেখা যাতে Midjourney, Leonardo, SDXL বা যেকোনো ইমেজ জেনারেটরে দিলে উষ্ণ (warm-tone) রঙের প্যালেট, বাংলা সাজপোশাক (শাড়ি-পাঞ্জাবি), নরম আলো ও আবেগঘন রোমান্টিক দৃশ্য তৈরি হয় — ঠিক যেভাবে তোমার স্ক্রিনশটগুলোতে দেখা গেছে।</p>
+    <div class="hero-stats">
+      <div class="stat"><b id="statTotal">0</b><span>মোট প্রম্পট</span></div>
+      <div class="stat"><b id="statCat">0</b><span>ক্যাটাগরি</span></div>
+      <div class="stat"><b>1‑Click</b><span>কপি সুবিধা</span></div>
+    </div>
+  </header>
+
+  <div class="base-style-card">
+    <h2>🎨 বেস স্টাইল (সব প্রম্পটের সাথে অটো যুক্ত হয়)</h2>
+    <p class="note">এই লেখাটা প্রতিটি প্রম্পটের শেষে যোগ হয়ে কপি হবে, যাতে সবগুলো ছবি একই আর্ট স্টাইলে (একই রঙ, লাইটিং, ক্যারেক্টার ডিজাইন) তৈরি হয়। চাইলে এখানেই এডিট করে নিজের মতো ঠিক করে নিতে পারো — নিচের সব প্রম্পটে অটো আপডেট হয়ে যাবে।</p>
+    <textarea id="baseStyleText">Warm-toned 2D digital illustration in a popular Bengali social-media romantic poster art style, soft painterly shading with subtle brush texture, semi-realistic character proportions with expressive eyes and simple clean facial features, warm earthy color palette of ochre, terracotta, deep brown, muted gold and dusty green, cinematic soft directional lighting, minimal or softly blurred background, characters dressed in traditional Bengali attire (saree, blouse, panjabi, kurta), vertical poster composition, 9:16 aspect ratio suited for social media reel cover, calm nostalgic romantic or emotional mood, flat clean line art with subtle gradients, subtle vignette, high detail on hands and facial expression, matte finish, no text overlay, no watermark</textarea>
+  </div>
+
+  <div class="toolbar">
+    <input type="text" id="searchInput" placeholder="🔍 প্রম্পট খুঁজুন... (যেমন: বৃষ্টি, বারান্দা, বিয়ে, কান্না)">
+  </div>
+  <div class="chips" id="chipRow"></div>
+
+  <div class="grid" id="promptGrid"></div>
+
+  <div class="add-section">
+    <h2>➕ নতুন প্রম্পট যোগ করো</h2>
+    <div class="add-form">
+      <div class="full">
+        <label>ক্যাটাগরি</label>
+        <select id="newCat"></select>
+      </div>
+      <div class="full">
+        <label>শিরোনাম (বাংলায়)</label>
+        <input type="text" id="newTitle" placeholder="যেমন: ছাদে সন্ধ্যার চা">
+      </div>
+      <div class="full">
+        <label>দৃশ্যের বর্ণনা (ইংরেজি প্রম্পটে, বেস স্টাইল অটো যুক্ত হবে)</label>
+        <textarea id="newScene" placeholder="A young couple sitting on a rooftop at dusk, sharing tea, city skyline softly blurred behind them, gentle wind in the woman's hair..."></textarea>
+      </div>
+      <button onclick="addCustomPrompt()">প্রম্পট সংরক্ষণ করো</button>
+    </div>
+    <div id="saveMsg">✅ প্রম্পট সংরক্ষিত হয়েছে, নিচে তালিকায় যুক্ত হয়েছে!</div>
+  </div>
+
+  <footer>
+    তৈরি: MH Academy প্রম্পট লাইব্রেরি · সব প্রম্পট এই ব্রাউজারে সংরক্ষিত থাকে (তোমার একাউন্টে, প্রতিবার লোড হলে দেখা যাবে)।<br>
+    কোনো প্রম্পট মুছে ফেলতে চাইলে কাস্টম কার্ডের 🗑️ বাটনে ক্লিক করো।
+  </footer>
+</div>
+
+<div id="installBanner">
+  <div class="txt"><b>অ্যাপ হিসেবে ইনস্টল করো</b>হোম স্ক্রিনে যোগ করে অফলাইনেও দ্রুত এই প্রম্পট লাইব্রেরি খুলতে পারবে।</div>
+  <button class="install-btn" id="installBtn">ইনস্টল করো</button>
+  <button class="dismiss-btn" id="dismissBtn">✕</button>
+</div>
+
+<script>
+/* ---------------- BASE DATA: 100+ PROMPTS ---------------- */
+const CATEGORIES = [
+  "প্রেমের আলিঙ্গন",
+  "বৃষ্টির মুহূর্ত",
+  "জানালা ও বারান্দা",
+  "অভিমান ও মান-ভাঙানো",
+  "বিচ্ছেদ ও কান্না",
+  "বিয়ে ও অনুষ্ঠান",
+  "পারিবারিক মুহূর্ত",
+  "প্রকৃতি ও ভ্রমণ",
+  "রাত ও চাঁদনী",
+  "ঐতিহ্যবাহী স্থাপত্য",
+  "ঘরোয়া মুহূর্ত",
+  "যত্ন ও সেবা",
+  "উৎসব"
+];
+
+const BASE_PROMPTS = [
+["প্রেমের আলিঙ্গন","কপালে কপাল ঠেকিয়ে","A man gently holds a woman's face with both hands, foreheads touching, eyes closed, soft warm golden backlight, intimate tender moment, plain warm-toned wall background"],
+["প্রেমের আলিঙ্গন","পেছন থেকে জড়িয়ে ধরা","A man embraces a woman from behind, chin resting on her shoulder, both looking into the distance, warm afternoon light, courtyard setting"],
+["প্রেমের আলিঙ্গন","হাত ধরে মুখোমুখি","Couple standing face to face holding both hands, gentle smiles, saree and kurta, soft ochre background wall, tender eye contact"],
+["প্রেমের আলিঙ্গন","কাঁধে মাথা রাখা","Woman resting her head on a man's shoulder while sitting on a stone bench, both looking forward with content expression, dusk lighting"],
+["প্রেমের আলিঙ্গন","গালে হাত রাখা","Close-up of a man cupping woman's cheek tenderly, her eyes slightly closed, warm terracotta background, soft rim light"],
+["প্রেমের আলিঙ্গন","গভীর আলিঙ্গন দরজায়","Couple hugging tightly in an old wooden doorway, woman's face buried in man's chest, warm interior light spilling out"],
+["প্রেমের আলিঙ্গন","হাতে হাত জড়িয়ে হাঁটা","Couple walking together along a narrow lane, arms linked, traditional attire, warm dusty gold light, buildings blurred in background"],
+["প্রেমের আলিঙ্গন","চোখে চোখ রাখা","Two profiles facing each other extremely close, almost touching noses, warm golden hour lighting, minimal background"],
+["প্রেমের আলিঙ্গন","পুনর্মিলনের আলিঙ্গন","Emotional reunion hug at a doorway, woman's arms wrapped around man's neck, both eyes closed, warm nostalgic lighting"],
+["প্রেমের আলিঙ্গন","কোলে মাথা রেখে বিশ্রাম","Woman resting her head on man's lap while he strokes her hair gently, both seated on the floor, soft indoor lamp light"],
+
+["বৃষ্টির মুহূর্ত","এক ছাতার নিচে দুজন","Couple walking together under one large green umbrella in gentle rain, wet cobblestone street reflecting warm streetlight, romantic mood"],
+["বৃষ্টির মুহূর্ত","বৃষ্টিতে ভিজে দৌড়ানো","Couple running joyfully hand in hand through rain, sari and dhoti getting wet, splash of water, warm evening tones"],
+["বৃষ্টির মুহূর্ত","বারান্দায় বৃষ্টি দেখা","Couple sitting on a porch step watching rain fall, cups of tea in hand, warm lantern light, dark rainy background"],
+["বৃষ্টির মুহূর্ত","জানালার কাছে বৃষ্টির ফোঁটা","Woman looking out through a rain-streaked window, man standing behind her, soft blue-grey rainy light, cozy interior"],
+["বৃষ্টির মুহূর্ত","বৃষ্টিতে আলিঙ্গন দরজায়","Couple embracing in a doorway sheltering from heavy rain, warm interior glow contrasting with dark wet outdoors"],
+["বৃষ্টির মুহূর্ত","নদীর ধারে বৃষ্টিস্নাত সন্ধ্যা","Couple standing by a river during light rain, reflection of both in the water, distant boat, moody blue-grey palette"],
+["বৃষ্টির মুহূর্ত","সাইকেলে বৃষ্টিতে ভেজা যাত্রা","Couple riding an old bicycle together through rain, woman sitting sideways on the back seat, warm streetlamp glow"],
+["বৃষ্টির মুহূর্ত","ছাদে বৃষ্টি উপভোগ","Couple standing on a rooftop with arms open enjoying the rain, city skyline faintly visible, dramatic overcast sky"],
+
+["জানালা ও বারান্দা","কাঠের জানালায় হেলান দিয়ে","Woman leaning against an old wooden window frame, man standing outside holding her hand through the window, warm afternoon light"],
+["জানালা ও বারান্দা","বারান্দার রেলিং ধরে কথা বলা","Couple leaning on a balcony railing facing each other, traditional courtyard house in background, warm golden light"],
+["জানালা ও বারান্দা","জানালা দিয়ে উঁকি দেওয়া প্রেম","Man reaching up toward a woman leaning out of a window, flowers in her hair, warm evening tone, old heritage building wall"],
+["জানালা ও বারান্দা","বারান্দায় একা বসে অপেক্ষা","Woman sitting alone on balcony steps looking into distance, man approaching from far, soft dusk lighting, quiet nostalgic mood"],
+["জানালা ও বারান্দা","জানালার ধারে চা হাতে","Couple sitting by a large window each holding a cup of tea, soft morning light streaming in, cozy domestic scene"],
+["জানালা ও বারান্দা","বারান্দায় চাঁদনী রাতে বসে থাকা","Couple sitting close on a balcony at night under moonlight, silhouettes against a glowing round moon, warm string lights"],
+["জানালা ও বারান্দা","জানালার শিক ধরে বিষণ্ন দৃষ্টি","Woman holding window bars looking outside with a longing expression, man visible walking away outside, muted sepia tone"],
+["জানালা ও বারান্দা","বারান্দায় বই পড়া মুহূর্ত","Man leaning on balcony pillar reading a letter while woman watches from behind with a shy smile, warm terracotta walls"],
+
+["অভিমান ও মান-ভাঙানো","পিঠ ফিরিয়ে অভিমান","Woman sitting with her back turned to the man in sulk, he gently reaches to touch her shoulder, warm interior lamp light"],
+["অভিমান ও মান-ভাঙানো","হাতে হাত রেখে মান ভাঙানো","Man holding woman's hand trying to console her while she looks away with a slight pout, soft warm lighting, courtyard bench"],
+["অভিমান ও মান-ভাঙানো","দূরত্ব রেখে বসে থাকা","Couple sitting at opposite ends of a bench avoiding eye contact after an argument, muted cool-toned lighting, tense mood"],
+["অভিমান ও মান-ভাঙানো","ফুল দিয়ে মান ভাঙানো","Man offering a single flower to a woman who is upset and looking away, hopeful expression, warm afternoon garden light"],
+["অভিমান ও মান-ভাঙানো","জানালার পাশে একা রাগ করে বসে","Woman sitting alone near a window with arms crossed, man standing at the doorway hesitant to approach, dim warm light"],
+["অভিমান ও মান-ভাঙানো","কানে কানে ক্ষমা চাওয়া","Man whispering an apology close to woman's ear while she tries to hide a smile, warm blush lighting, intimate close-up"],
+["অভিমান ও মান-ভাঙানো","মুখ ঘুরিয়ে থাকা প্রেমিকা","Woman turning her face away stubbornly while man gently holds her chin trying to make her look at him, warm soft tones"],
+["অভিমান ও মান-ভাঙানো","চিঠি লিখে ক্ষমা চাওয়া","Man writing an apology letter at a wooden desk by candlelight, woman visible in soft focus in the next room, warm sepia mood"],
+
+["বিচ্ছেদ ও কান্না","স্টেশনে বিদায়ের দৃশ্য","Emotional farewell scene at an old railway station, woman holding man's hand through a train window, steam and warm light, bittersweet mood"],
+["বিচ্ছেদ ও কান্না","চোখের জল মোছা","Man gently wiping tears from a woman's cheek with his thumb, both looking into each other's eyes, warm close-up lighting"],
+["বিচ্ছেদ ও কান্না","একা বসে কান্না করা","Woman sitting alone on the floor crying with knees drawn up, dim warm lamp light, empty room, melancholic mood"],
+["বিচ্ছেদ ও কান্না","পিঠ ঠেকিয়ে বসে থাকা দুজন","Couple sitting back to back on the floor, both looking sad and distant, soft cool-warm mixed lighting, quiet heartbreak mood"],
+["বিচ্ছেদ ও কান্না","শেষ বিদায়ের আলিঙ্গন","Couple hugging tightly at a doorway before a long separation, suitcase beside them, warm dim hallway light, emotional farewell"],
+["বিচ্ছেদ ও কান্না","জানালার ধারে একা দাঁড়িয়ে চোখের জল","Woman standing alone by a window with tears, faint silhouette of the man walking away outside, muted blue-grey palette"],
+["বিচ্ছেদ ও কান্না","ব্যাগ গোছানোর সময় মন খারাপ","Woman packing a suitcase with a heavy heart while man watches silently from the doorway, warm dim bedroom light"],
+["বিচ্ছেদ ও কান্না","বৃষ্টিতে ভেজা বিচ্ছেদ","Couple standing apart in the rain, both looking away from each other with sorrow, cool blue-grey stormy tones"],
+
+["বিয়ে ও অনুষ্ঠান","মালাবদল অনুষ্ঠান","Bride and groom exchanging floral garlands at a traditional Bengali wedding, warm golden decorations, soft glowing lights, joyful expressions"],
+["বিয়ে ও অনুষ্ঠান","সিঁদুর পরানো মুহূর্ত","Groom applying sindoor on bride's forehead parting, both in traditional red and gold wedding attire, warm intimate lighting"],
+["বিয়ে ও অনুষ্ঠান","মেহেন্দি হাতে","Bride showing her henna-decorated hand to the groom, both smiling warmly, festive lights and marigold flowers in background"],
+["বিয়ে ও অনুষ্ঠান","বিয়ের আশীর্বাদ নেওয়া","Young couple bowing to take blessings from an elder woman, warm domestic setting, traditional saree and dhoti, soft afternoon light"],
+["বিয়ে ও অনুষ্ঠান","কনে বিদায়ের মুহূর্ত","Emotional bidaai scene, bride hugging her father tearfully while groom waits nearby, warm nostalgic sepia tones"],
+["বিয়ে ও অনুষ্ঠান","বিয়ের প্রথম রাতের লজ্জা","Newly married couple sitting together on a flower-decorated bed, bride shyly looking down, groom gently lifting her chin, warm candlelight"],
+["বিয়ে ও অনুষ্ঠান","শাঁখা-পলা পরানো","Groom sliding a shell bangle onto the bride's wrist during a wedding ritual, close-up on hands, warm golden ceremonial light"],
+["বিয়ে ও অনুষ্ঠান","বিয়ের অঙ্গীকারনামা স্বাক্ষর","Bride and groom signing the wedding registry together at a wooden table, warm firelight, traditional attire, quiet joyful mood"],
+
+["পারিবারিক মুহূর্ত","মায়ের সাথে মেয়ের আদর","A mother lovingly holding her daughter's face, both dressed in colorful sarees, warm domestic courtyard, tender family affection"],
+["পারিবারিক মুহূর্ত","তিন প্রজন্মের একসাথে বসা","Three generations of women sitting together on a floor mat, sharing a warm moment, floral garlands hanging above, festive warm tone"],
+["পারিবারিক মুহূর্ত","বাবার কাঁধে সন্তান","Father carrying a small child on his shoulders while mother walks beside smiling, warm village pathway background"],
+["পারিবারিক মুহূর্ত","পরিবারে চিঠি পড়ে শোনানো","Elderly parent reading a letter aloud to family gathered around, warm lamp light, wooden interior, nostalgic domestic scene"],
+["পারিবারিক মুহূর্ত","ভাইবোনের খুনসুটি","Brother and sister teasing each other playfully on a courtyard swing, warm afternoon sunlight, traditional rural house background"],
+["পারিবারিক মুহূর্ত","দাদির কোলে নাতনি","Grandmother combing granddaughter's long hair while sitting on a veranda, warm golden evening light, quiet peaceful mood"],
+["পারিবারিক মুহূর্ত","পরিবারের সাথে খাওয়ার দৃশ্য","Family sitting together on the floor sharing a meal from brass plates, warm kitchen lantern light, cozy home setting"],
+["পারিবারিক মুহূর্ত","মায়ের অসুস্থ সন্তানের সেবা","Mother gently placing a hand on her sick child's forehead, worried tender expression, warm dim bedroom lighting"],
+
+["প্রকৃতি ও ভ্রমণ","ধানক্ষেতের মাঝে হাঁটা","Couple walking hand in hand through a golden paddy field at sunset, warm orange sky, gentle breeze, distant village huts"],
+["প্রকৃতি ও ভ্রমণ","বটগাছের নিচে বিশ্রাম","Couple sitting under a large banyan tree, woman leaning on man's shoulder, dappled warm sunlight through leaves"],
+["প্রকৃতি ও ভ্রমণ","পদ্মদীঘিতে নৌকা ভ্রমণ","Couple sitting in a small wooden boat surrounded by lotus flowers, calm still water, warm soft morning light"],
+["প্রকৃতি ও ভ্রমণ","নদীর ধারে বসে গল্প","Couple sitting on a riverbank at dusk, silhouette of a fisherman's boat in the distance, warm orange reflection on water"],
+["প্রকৃতি ও ভ্রমণ","ট্রেনের জানালার পাশে","Couple sitting together by a train window, warm sunlight streaming in, passing green fields blurred outside, calm travel mood"],
+["প্রকৃতি ও ভ্রমণ","পাহাড়ি রাস্তায় হাঁটা","Couple walking along a quiet hill path holding hands, warm mist in the background, traditional shawl wrapped around shoulders"],
+["প্রকৃতি ও ভ্রমণ","গ্রামের মেঠোপথে সাইকেল","Couple riding a bicycle together along a village dirt road, warm dusty gold light, coconut trees lining the path"],
+["প্রকৃতি ও ভ্রমণ","সমুদ্র সৈকতে পড়ন্ত বিকেল","Couple standing at the edge of the sea at sunset, waves gently touching their feet, warm orange and pink sky"],
+
+["রাত ও চাঁদনী","জ্যোৎস্না রাতে ছাদে বসে","Couple sitting close together on a rooftop under a bright full moon, string lights glowing, deep blue night sky, warm intimate mood"],
+["রাত ও চাঁদনী","মোমবাতির আলোয় কথোপকথন","Couple sitting face to face with a single candle between them, warm flickering light on their faces, dark room background"],
+["রাত ও চাঁদনী","রাতের আকাশে তারা দেখা","Couple lying on a rooftop mat looking up at a starry night sky, warm blanket around them, deep indigo tones"],
+["রাত ও চাঁদনী","রাতের শহরের ছাদে","Couple standing on a city rooftop at night, glowing skyline lights in the background, warm silhouette lighting"],
+["রাত ও চাঁদনী","জানালা দিয়ে চাঁদ দেখা","Woman looking out of a window at a glowing moon while man watches her from behind, soft blue-gold night palette"],
+["রাত ও চাঁদনী","প্রদীপ হাতে সন্ধ্যা আরতি","Couple lighting small oil lamps together at dusk on temple steps, warm golden glow contrasting deep blue evening sky"],
+["রাত ও চাঁদনী","রাতের বারান্দায় চা","Couple sharing tea on a moonlit balcony, warm lantern glow, quiet peaceful late-night mood, traditional courtyard house"],
+["রাত ও চাঁদনী","রাতের নদীর ধারে হাঁটা","Couple walking along a riverbank at night, reflection of the moon shimmering on water, warm lantern light nearby"],
+
+["ঐতিহ্যবাহী স্থাপত্য","পুরোনো প্রাসাদের আঙিনায়","Couple standing in the courtyard of an old heritage palace, intricately carved stone arches, warm sandstone tones, golden hour light"],
+["ঐতিহ্যবাহী স্থাপত্য","জমিদার বাড়ির সিঁড়িতে","Couple sitting on the wide stone steps of an old zamindar mansion, weathered pillars in background, warm nostalgic sepia tone"],
+["ঐতিহ্যবাহী স্থাপত্য","মন্দিরের প্রাঙ্গণে সন্ধ্যা","Couple standing near an ancient temple courtyard at dusk, warm oil lamps lit around, traditional stone carvings, calm reverent mood"],
+["ঐতিহ্যবাহী স্থাপত্য","পুরোনো কেল্লার প্রবেশদ্বারে","Couple standing at the grand entrance gate of an old fort, warm afternoon light, weathered brick walls, historic atmosphere"],
+["ঐতিহ্যবাহী স্থাপত্য","ঔপনিবেশিক আমলের ভবনের সামনে","Couple standing before a colonial-era heritage building with tall arches, warm golden light, vintage travel-poster mood"],
+["ঐতিহ্যবাহী স্থাপত্য","পুরোনো হাভেলির জানালায়","Couple framed inside an ornate carved window of an old haveli, warm interior light glowing behind them, intricate stone lattice"],
+["ঐতিহ্যবাহী স্থাপত্য","ঘাটের সিঁড়িতে বসে থাকা","Couple sitting on old stone riverside ghat steps, boats floating nearby, warm dusk light reflecting on water"],
+["ঐতিহ্যবাহী স্থাপত্য","পুরোনো লাইব্রেরির ভেতরে","Couple standing among tall wooden bookshelves in an old heritage library, warm dim reading-lamp light, dust particles in sunbeam"],
+
+["ঘরোয়া মুহূর্ত","রান্নাঘরে একসাথে রান্না","Couple cooking together in a traditional kitchen, warm stove light, playful smiles, copper utensils around, cozy domestic scene"],
+["ঘরোয়া মুহূর্ত","সোফায় বসে গল্প","Couple sitting close on a simple sofa sharing a warm conversation, soft lamp light, quiet evening home setting"],
+["ঘরোয়া মুহূর্ত","চুল বেঁধে দেওয়া মুহূর্ত","Man gently braiding or tying flowers into woman's long hair while she sits in front of a mirror, warm bedroom light"],
+["ঘরোয়া মুহূর্ত","একসাথে বই পড়া","Couple sitting together reading a book, woman resting her head on man's shoulder, warm reading-lamp glow, quiet cozy mood"],
+["ঘরোয়া মুহূর্ত","চায়ের কাপ হাতে সকাল","Couple sitting at a small table sharing morning tea, warm sunrise light streaming through a curtain, peaceful domestic scene"],
+["ঘরোয়া মুহূর্ত","দেয়ালে ছবি টাঙানো","Couple hanging a framed photo on the wall of their new home together, warm afternoon light, simple furniture, hopeful mood"],
+["ঘরোয়া মুহূর্ত","ফোনে কথা বলার প্রতীক্ষা","Woman sitting by an old rotary telephone waiting for a call, warm lamp light, nostalgic vintage interior"],
+["ঘরোয়া মুহূর্ত","একসাথে খাবার তৈরি ভাগাভাগি","Couple feeding each other a bite of food at a small dinner table, warm candle light, intimate playful mood"],
+
+["যত্ন ও সেবা","জ্বরে মাথায় হাত রাখা","Woman gently placing a wet cloth on the man's forehead while he lies sick in bed, warm dim lamp light, caring expression"],
+["যত্ন ও সেবা","হাত ধরে হাসপাতালের বেঞ্চে","Couple sitting on a hospital corridor bench, woman comforting worried man by holding his hand, muted warm-cool lighting"],
+["যত্ন ও সেবা","ওষুধ খাওয়ানোর মুহূর্ত","Man carefully giving medicine to a woman resting in bed, warm bedside lamp light, tender concerned expression"],
+["যত্ন ও সেবা","কাঁধে মাথা রেখে সান্ত্বনা","Man comforting a crying woman by letting her rest her head on his shoulder, warm dim room light, gentle embrace"],
+["যত্ন ও সেবা","বৃদ্ধ বাবা-মাকে সেবা","Adult child gently combing an elderly parent's hair on a veranda, warm afternoon light, respectful tender care"],
+["যত্ন ও সেবা","আহত হাতে ব্যান্ডেজ বাঁধা","Woman carefully wrapping a bandage around man's injured hand, both looking at each other with concern, warm indoor light"],
+["যত্ন ও সেবা","ছাতা ধরে বৃষ্টি থেকে আগলে রাখা","Man holding an umbrella over the woman protectively while rain pours, warm streetlight glow, caring protective gesture"],
+["যত্ন ও সেবা","কোলে শুইয়ে ঘুম পাড়ানো","Woman gently rocking a sleepy man's head in her lap, soft moonlight through a window, tender quiet night scene"],
+
+["উৎসব","দুর্গাপূজার প্যান্ডেলে","Couple standing together at a festively decorated pandal during Durga Puja, warm string lights, marigold garlands, joyful festive crowd blurred"],
+["উৎসব","রাখি বাঁধার মুহূর্ত","Sister tying a rakhi thread on brother's wrist, warm household setting, traditional attire, affectionate family mood"],
+["উৎসব","পহেলা বৈশাখের সাজে","Couple dressed in traditional white and red Pohela Boishakh attire walking through a festival fair, warm morning light, colorful decorations"],
+["উৎসব","প্রদীপ জ্বালিয়ে দীপাবলি উদযাপন","Couple lighting rows of small clay lamps together on the steps of their home, warm golden glow, festive evening mood"],
+["উৎসব","মেলায় হাত ধরে ঘোরা","Couple walking hand in hand through a village fair, colorful stalls and lanterns blurred in background, warm joyful atmosphere"]
+];
+
+/* ---------------- STATE ---------------- */
+let customPrompts = [];
+let activeCategory = "সব";
+
+function baseStyle(){ return document.getElementById('baseStyleText').value.trim(); }
+
+function allPrompts(){
+  const base = BASE_PROMPTS.map((p,i)=>({id:'b'+i, cat:p[0], title:p[1], scene:p[2], custom:false}));
+  return base.concat(customPrompts);
+}
+
+function renderChips(){
+  const row = document.getElementById('chipRow');
+  const cats = ["সব", ...CATEGORIES];
+  row.innerHTML = cats.map(c=>`<div class="chip ${c===activeCategory?'active':''}" data-cat="${c}">${c}</div>`).join('');
+  row.querySelectorAll('.chip').forEach(el=>{
+    el.addEventListener('click', ()=>{ activeCategory = el.dataset.cat; renderChips(); renderGrid(); });
+  });
+}
+
+function renderGrid(){
+  const grid = document.getElementById('promptGrid');
+  const search = document.getElementById('searchInput').value.trim().toLowerCase();
+  let list = allPrompts();
+  if(activeCategory !== "সব") list = list.filter(p=>p.cat===activeCategory);
+  if(search) list = list.filter(p=> (p.title+p.scene+p.cat).toLowerCase().includes(search));
+
+  document.getElementById('statTotal').textContent = allPrompts().length + "+";
+  document.getElementById('statCat').textContent = CATEGORIES.length;
+
+  if(list.length===0){
+    grid.innerHTML = '<div class="empty-note">কোনো প্রম্পট পাওয়া যায়নি, অন্য শব্দ দিয়ে খুঁজে দেখো।</div>';
+    return;
+  }
+
+  grid.innerHTML = list.map((p, idx)=>{
+    const full = p.scene + ". " + baseStyle();
+    return `
+    <div class="card ${p.custom?'custom':''}" data-id="${p.id}">
+      ${p.custom ? `<button class="del-btn" onclick="deleteCustom('${p.id}')">🗑️</button>` : `<div class="num">#${idx+1}</div>`}
+      <div class="cat">${p.cat}</div>
+      <h3>${p.title}</h3>
+      <div class="prompt-text">${full}</div>
+      <button class="copy-btn" onclick="copyPrompt(this, \`${full.replace(/`/g,"'")}\`)">📋 কপি করো</button>
+    </div>`;
+  }).join('');
+}
+
+function copyPrompt(btn, text){
+  navigator.clipboard.writeText(text).then(()=>{
+    const orig = btn.textContent;
+    btn.textContent = "✅ কপি হয়েছে!";
+    btn.classList.add('copied');
+    setTimeout(()=>{ btn.textContent = orig; btn.classList.remove('copied'); }, 1600);
+  }).catch(()=>{
+    alert('কপি করা যায়নি, ম্যানুয়ালি সিলেক্ট করে কপি করো।');
+  });
+}
+
+function populateCategorySelect(){
+  const sel = document.getElementById('newCat');
+  sel.innerHTML = CATEGORIES.map(c=>`<option value="${c}">${c}</option>`).join('');
+}
+
+async function loadCustomPrompts(){
+  try{
+    const res = await window.storage.get('custom_prompts', false);
+    if(res && res.value){ customPrompts = JSON.parse(res.value); }
+  }catch(e){ customPrompts = []; }
+  renderGrid();
+}
+
+async function saveCustomPrompts(){
+  try{
+    await window.storage.set('custom_prompts', JSON.stringify(customPrompts), false);
+  }catch(e){ console.error('storage save failed', e); }
+}
+
+function addCustomPrompt(){
+  const cat = document.getElementById('newCat').value;
+  const title = document.getElementById('newTitle').value.trim();
+  const scene = document.getElementById('newScene').value.trim();
+  if(!title || !scene){ alert('শিরোনাম ও দৃশ্যের বর্ণনা দুটোই লিখতে হবে।'); return; }
+  const id = 'c' + Date.now();
+  customPrompts.push({id, cat, title, scene, custom:true});
+  saveCustomPrompts();
+  document.getElementById('newTitle').value='';
+  document.getElementById('newScene').value='';
+  const msg = document.getElementById('saveMsg');
+  msg.style.display='block';
+  setTimeout(()=>{ msg.style.display='none'; }, 2500);
+  renderGrid();
+}
+
+function deleteCustom(id){
+  if(!confirm('এই প্রম্পটটি মুছে ফেলতে চাও?')) return;
+  customPrompts = customPrompts.filter(p=>p.id!==id);
+  saveCustomPrompts();
+  renderGrid();
+}
+
+document.getElementById('searchInput').addEventListener('input', renderGrid);
+document.getElementById('baseStyleText').addEventListener('input', renderGrid);
+
+renderChips();
+populateCategorySelect();
+loadCustomPrompts();
+
+/* ---------------- INSTALL / PWA NOTIFICATION ---------------- */
+let deferredPrompt = null;
+const banner = document.getElementById('installBanner');
+const installBtn = document.getElementById('installBtn');
+const dismissBtn = document.getElementById('dismissBtn');
+
+window.addEventListener('beforeinstallprompt', (e)=>{
+  e.preventDefault();
+  deferredPrompt = e;
+  checkAndShowBanner();
+});
+
+async function checkAndShowBanner(){
+  try{
+    const dismissed = await window.storage.get('install_banner_dismissed', false);
+    if(dismissed && dismissed.value === 'true') return;
+  }catch(e){ /* key not found is fine */ }
+  banner.classList.add('show');
+}
+
+installBtn.addEventListener('click', async ()=>{
+  if(!deferredPrompt){
+    alert('এই ব্রাউজারে সরাসরি ইনস্টল সাপোর্ট নেই। ব্রাউজার মেনু থেকে "Add to Home Screen" ব্যবহার করো।');
+    return;
+  }
+  deferredPrompt.prompt();
+  const {outcome} = await deferredPrompt.userChoice;
+  deferredPrompt = null;
+  banner.classList.remove('show');
+  if(outcome === 'accepted'){
+    try{ await window.storage.set('install_banner_dismissed', 'true', false); }catch(e){}
+  }
+});
+
+dismissBtn.addEventListener('click', async ()=>{
+  banner.classList.remove('show');
+  try{ await window.storage.set('install_banner_dismissed', 'true', false); }catch(e){}
+});
+</script>
+</body>
+</html>
